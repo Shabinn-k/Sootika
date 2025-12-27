@@ -5,7 +5,7 @@ import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom'
 import CartContextProvider from './context/CartContext.jsx'
 import { AuthProvider } from './Authentication/AuthContext.jsx'
-//jjjhhffghgv
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
