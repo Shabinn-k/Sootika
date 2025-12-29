@@ -1,57 +1,67 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Layout.css";
 import { useAuth } from "../../Authentication/AuthContext";
 import { FiLogOut } from "react-icons/fi";
 
 const Layout = ({ children }) => {
   const { logoutAdmin } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logoutAdmin();
+    navigate("/", { replace: true });
+  };
 
   return (
     <div className="admin-wrapper">
 
-      <div className="admin-sidebar">
+      {/* SIDEBAR */}
+      <aside className="admin-sidebar">
         <h2 className="admin-logo">Admin</h2>
 
-        <ul className="admin-menu">
-          <li>
-            <Link className="link-items1" to="/admin/dashboard">
-              Dashboard
-            </Link>
-          </li>
- 
-          <li>
-            <Link className="link-items1" to="/admin/products/">
-              Products
-            </Link>
-          </li>
- 
-          <li>
-            <Link className="link-items1" to="/admin/users">
-              Users
-            </Link>
-          </li>
+        <nav>
+          <ul className="admin-menu">
+            <li>
+              <NavLink className="link-items1" to="/admin/dashboard">
+                Dashboard
+              </NavLink>
+            </li>
 
-          <li>
-            <Link className="link-items1" to="/admin/orders">
-              Orders
-            </Link>
-          </li>
+            <li>
+              <NavLink className="link-items1" to="/admin/products">
+                Products
+              </NavLink>
+            </li>
 
-          <li>
-            <Link className="link-items1" to="/admin/feedback">
-              Feedback
-            </Link>
-          </li>
-        </ul>
+            <li>
+              <NavLink className="link-items1" to="/admin/users">
+                Users
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink className="link-items1" to="/admin/orders">
+                Orders
+              </NavLink>
+            </li>
+
+            <li>
+              <NavLink className="link-items1" to="/admin/feedback">
+                Feedback
+              </NavLink>
+            </li>
+          </ul>
+        </nav>
 
         <div className="logout-wrapper">
-          <Link className="logout" to="/" onClick={logoutAdmin}>
+          <button className="logout" onClick={handleLogout}>
             <FiLogOut /> Logout
-          </Link>
+          </button>
         </div>
-      </div>
+      </aside>
 
+      {/* MAIN CONTENT */}
       <main className="admin-content">
         <div className="admin-page">{children}</div>
       </main>

@@ -2,7 +2,6 @@
 .dashboard-container {
   padding: 25px;
   background: #f7efe5;
-  /* beige */
   min-height: 100vh;
 }
 
@@ -11,7 +10,6 @@
   font-size: 28px;
   font-weight: 700;
   color: #5a4634;
-  /* warm deep brown */
   margin-bottom: 25px;
 }
 
@@ -25,14 +23,13 @@
 
 .dash-card {
   background: #fff7ec;
-  /* soft cream */
   padding: 20px;
   border-radius: 14px;
   border: 1px solid #e6d9cd;
   box-shadow: 0 4px 10px rgba(90, 70, 52, 0.12);
-  /* warm brown shadow */
   text-align: center;
-  transition: 0.2s ease-in-out;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .dash-card:hover {
@@ -54,12 +51,10 @@
 /* WARNING / DANGER ACCENTS */
 .warning {
   border-left: 6px solid #c49a6c;
-  /* soft gold */
 }
 
 .danger {
   border-left: 6px solid #d9534f;
-  /* muted red */
 }
 
 /* ====== RECENT ORDERS SECTION ====== */
@@ -67,13 +62,14 @@
   font-size: 22px;
   font-weight: 600;
   color: #5a4634;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 
 .recent-orders {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  cursor: pointer;
 }
 
 .recent-item {
@@ -82,6 +78,11 @@
   border-radius: 12px;
   border: 1px solid #e6d9cd;
   box-shadow: 0 2px 8px rgba(90, 70, 52, 0.12);
+  transition: background 0.2s ease;
+}
+
+.recent-item:hover {
+  background: #f3eadf;
 }
 
 .recent-item p {
@@ -93,5 +94,9 @@
 @media (max-width: 768px) {
   .dash-cards {
     grid-template-columns: 1fr;
+  }
+
+  .dash-title {
+    font-size: 24px;
   }
 }

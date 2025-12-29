@@ -1,12 +1,19 @@
-import React from 'react'
+import { useNavigate } from "react-router-dom";
+import "./NotFound.css";
 
 const NotFound = () => {
-  return (
-    <div>
-        <h1 className='text-center'><b>404</b></h1>
-        <h1 className='text-center'><b>sorry page not found!</b></h1>
-    </div>
-  )
-}
+  const navigate = useNavigate();
 
-export default NotFound
+  return (
+    <div className="notfound-container">
+      <h1 className="error-code">404</h1>
+      <p className="error-text">Sorry, the page you’re looking for doesn’t exist.</p>
+
+      <button className="hoome-btn" onClick={() => navigate("/")}>
+        Go to Home
+      </button>
+    </div>
+  );
+};
+
+export default NotFound;

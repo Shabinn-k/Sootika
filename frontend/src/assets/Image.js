@@ -6,7 +6,6 @@ import facebook from "./fb.webp";
 import linked from "./linked.webp";
 import hrt from "./hrt.webp";
 
-
     const image={
         cart,
         wish,

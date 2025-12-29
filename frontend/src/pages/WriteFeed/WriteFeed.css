@@ -14,17 +14,18 @@
   align-items: center;
 }
 
-/* 🔥 BLUR OVERLAY */
+/* 🔥 BLUR + DARK OVERLAY */
 .writefeed-container::before {
   content: "";
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  background: rgba(0, 0, 0, 0.25);
   z-index: 1;
 }
 
-/* 🔥 KEEP FORM ABOVE BLUR */
+/* 🔥 FORM ABOVE BLUR */
 .writefeed-form {
   position: relative;
   z-index: 2;
@@ -38,10 +39,7 @@
   text-align: center;
 }
 
-
-/* =========================
-   HEADING
-========================= */
+/* HEADING */
 .writefeed-form h2 {
   font-size: 22px;
   font-weight: 700;
@@ -49,9 +47,7 @@
   margin-bottom: 22px;
 }
 
-/* =========================
-   STAR RATING
-========================= */
+/* STAR RATING */
 .rating-stars {
   display: flex;
   justify-content: center;
@@ -63,10 +59,11 @@
   font-size: 28px;
   cursor: pointer;
   color: #d9c9b0;
-  transition: 0.2s ease;
+  transition: transform 0.2s ease, color 0.2s ease;
+  will-change: transform;
 }
 
-.star:hover {
+.star:not(.filled):hover {
   transform: scale(1.15);
 }
 
@@ -74,9 +71,7 @@
   color: #caa76d;
 }
 
-/* =========================
-   TEXTAREA
-========================= */
+/* TEXTAREA */
 .writefeed-form textarea {
   width: 100%;
   min-height: 110px;
@@ -95,9 +90,7 @@
   border-color: #caa76d;
 }
 
-/* =========================
-   SUBMIT BUTTON
-========================= */
+/* SUBMIT BUTTON */
 .writefeed-form button {
   width: 100%;
   padding: 12px;
@@ -108,7 +101,8 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: background 0.3s ease, transform 0.2s ease;
+  will-change: transform;
 }
 
 .writefeed-form button:hover {
@@ -116,9 +110,12 @@
   transform: translateY(-2px);
 }
 
-/* =========================
-   MOBILE
-========================= */
+.writefeed-form button:focus {
+  outline: 3px solid rgba(202, 167, 109, 0.6);
+  outline-offset: 3px;
+}
+
+/* MOBILE */
 @media (max-width: 480px) {
   .writefeed-form {
     padding: 25px 20px;

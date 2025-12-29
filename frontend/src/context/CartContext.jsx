@@ -26,24 +26,23 @@ const CartContextProvider = ({ children }) => {
         const res = await api.get(`/users/${user.id}`);
         setCartItems(res.data.cart || []);
         setWishItems(res.data.wishlist || []);
-      } catch (err) {
-        console.error("Fetch cart error:", err);
+      } catch {
+        toast.error("Failed to load cart data");
       }
     };
 
     fetchData();
-  }, [user]);
+  }, [user?.id]);
 
   /* =====================
-     UPDATE USER
+     UPDATE USER DATA
   ===================== */
-  const updateUserData = async (data) => {
+  const updateUserData = async (payload) => {
     if (!user) return;
     try {
-      await api.patch(`/users/${user.id}`, data);
-    } catch (err) {
-      console.error("Update user error:", err);
-      toast.error("Failed to update data");
+      await api.patch(`/users/${user.id}`, payload);
+    } catch {
+      toast.error("Failed to sync data");
     }
   };
 
@@ -56,28 +55,26 @@ const CartContextProvider = ({ children }) => {
       return;
     }
 
-    let updated = [];
+    let updatedCart;
 
     setCartItems((prev) => {
       const exist = prev.find((p) => p.id === item.id);
 
       if (exist) {
-        const qty = exist.quantity + (item.quantity || 1);
-
-        updated =
-          qty <= 0
-            ? prev.filter((p) => p.id !== item.id)
-            : prev.map((p) =>
-                p.id === item.id ? { ...p, quantity: qty } : p
-              );
+        updatedCart = prev.map((p) =>
+          p.id === item.id
+            ? { ...p, quantity: p.quantity + (item.quantity || 1) }
+            : p
+        );
       } else {
-        updated = [...prev, { ...item, quantity: 1 }];
+        updatedCart = [...prev, { ...item, quantity: 1 }];
       }
 
-      return updated;
+      return updatedCart;
     });
 
-    await updateUserData({ cart: updated });
+    await updateUserData({ cart: updatedCart });
+    toast.dismiss();
     toast.success("Cart updated");
   };
 
@@ -85,12 +82,14 @@ const CartContextProvider = ({ children }) => {
     const updated = cartItems.filter((item) => item.id !== id);
     setCartItems(updated);
     await updateUserData({ cart: updated });
+    toast.dismiss();
     toast.info("Item removed from cart");
   };
 
   const clearCart = async () => {
     setCartItems([]);
     await updateUserData({ cart: [] });
+    toast.dismiss();
     toast.info("Cart cleared");
   };
 
@@ -103,7 +102,7 @@ const CartContextProvider = ({ children }) => {
       return;
     }
 
-    if (wishItems.find((w) => w.id === item.id)) {
+    if (wishItems.some((w) => w.id === item.id)) {
       toast.info("Already in wishlist");
       return;
     }
@@ -111,6 +110,7 @@ const CartContextProvider = ({ children }) => {
     const updated = [...wishItems, item];
     setWishItems(updated);
     await updateUserData({ wishlist: updated });
+    toast.dismiss();
     toast.success("Added to wishlist");
   };
 
@@ -118,6 +118,7 @@ const CartContextProvider = ({ children }) => {
     const updated = wishItems.filter((item) => item.id !== id);
     setWishItems(updated);
     await updateUserData({ wishlist: updated });
+    toast.dismiss();
     toast.info("Removed from wishlist");
   };
 

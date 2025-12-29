@@ -1,4 +1,6 @@
-/* Page Container */
+/* =========================
+   PAGE CONTAINER
+========================= */
 .cart-page {
   max-width: 1000px;
   margin: 40px auto;
@@ -6,13 +8,15 @@
   font-family: "Segoe UI", sans-serif;
 }
 
-/* Empty Cart */
+/* =========================
+   EMPTY CART
+========================= */
 .empty-msg-container {
   text-align: center;
   margin-top: 80px;
 }
 
-.empty-msg-container h2 {
+.empty-msg {
   color: #6d4c2f;
   font-size: 26px;
   margin-bottom: 20px;
@@ -33,15 +37,27 @@
   background: #b89a75;
 }
 
-/* Header */
-.text-center {
+/* Bigger home button (bottom) */
+.home-btn.large {
+  display: block;
+  margin: 30px auto 0;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+/* =========================
+   TITLE
+========================= */
+.cart-title {
   text-align: center;
   color: #6d4c2f;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-size: 28px;
 }
 
-/* Cart Card */
+/* =========================
+   CART CARD
+========================= */
 .cart-card {
   display: flex;
   align-items: center;
@@ -59,7 +75,9 @@
   transform: translateY(-4px);
 }
 
-/* Product Info */
+/* =========================
+   PRODUCT INFO
+========================= */
 .cart-info h3 {
   font-size: 18px;
   margin: 0;
@@ -72,12 +90,6 @@
   font-size: 16px;
 }
 
-.cart-info p {
-  margin: 3px 0;
-  color: #a08b77;
-  font-size: 14px;
-}
-
 .cart-info span {
   margin-top: 4px;
   display: inline-block;
@@ -86,37 +98,43 @@
   font-weight: bold;
 }
 
-/* Quantity Controller */
-.cart-last {
+/* =========================
+   QUANTITY CONTROLLER
+========================= */
+.cart-qty {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   margin-left: auto;
 }
 
-.cart-last button {
-  width: 35px;
-  height: 35px;
+.cart-qty button {
+  width: 36px;
+  height: 36px;
   border: none;
   color: white;
   background: #d4b896;
-  font-size: 20px;
+  font-size: 22px;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.2s ease;
 }
 
-.cart-last button:hover {
+.cart-qty button:hover {
   background: #b89a75;
 }
 
-.cart-last h4 {
-  width: 30px;
+.cart-qty span {
+  min-width: 28px;
   text-align: center;
+  font-size: 16px;
+  font-weight: 600;
   color: #4a3627;
 }
 
-/* Remove Button */
+/* =========================
+   REMOVE BUTTON
+========================= */
 .remove-btn {
   padding: 8px 14px;
   background: #d9534f;
@@ -126,13 +144,16 @@
   font-size: 14px;
   cursor: pointer;
   margin-left: 10px;
+  transition: 0.2s ease;
 }
 
 .remove-btn:hover {
   background: #c9302c;
 }
 
-/* Payment Summary */
+/* =========================
+   PAYMENT SUMMARY
+========================= */
 .payment-summary {
   margin-top: 40px;
   background: #fffaf3;
@@ -161,8 +182,10 @@
   color: #6d4c2f;
 }
 
-/* Pay Button */
-.pay-btN {
+/* =========================
+   PAY BUTTON
+========================= */
+.pay-btn {
   width: 100%;
   margin-top: 20px;
   padding: 14px;
@@ -175,83 +198,56 @@
   transition: 0.3s ease;
 }
 
-.pay-btN:hover {
+.pay-btn:hover {
   background: #b89a75;
   transform: translateY(-2px);
 }
 
-/* Go Home Button */
-.home-btN1 {
-  display: block;
-  margin: 25px auto 0;
-  padding: 12px 30px;
-  background: #d4b896;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s ease;
-}
+/* =========================
+   RESPONSIVE
+========================= */
 
-.home-btN1:hover {
-  background: #b89a75;
-}
-
-/* ============================
-       RESPONSIVE
-=============================== */
-
-/* Tablet — Stack items cleanly */
+/* Tablet */
 @media (max-width: 900px) {
   .cart-card {
     flex-wrap: wrap;
     padding: 14px;
   }
 
-  .cart-last {
+  .cart-qty {
     margin-left: 0;
     width: 100%;
     justify-content: flex-end;
   }
 }
 
-/* Mobile — Full stack layout */
+/* Mobile */
 @media (max-width: 600px) {
   .cart-card {
     flex-direction: column;
     align-items: flex-start;
-    text-align: left;
   }
 
-  .cart-last {
+  .cart-qty {
     width: 100%;
     justify-content: space-between;
   }
 
   .remove-btn {
-    margin-left: 0;
     width: 100%;
+    margin-left: 0;
     text-align: center;
-  }
-
-  .cart-info h3 {
-    font-size: 16px;
-  }
-
-  .cart-info span {
-    font-size: 17px;
   }
 }
 
 /* Small Mobile */
 @media (max-width: 420px) {
-  .pay-btN {
+  .pay-btn {
     font-size: 16px;
     padding: 12px;
   }
 
-  .home-btN1 {
+  .home-btn.large {
     width: 100%;
   }
 }

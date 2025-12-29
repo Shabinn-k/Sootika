@@ -61,6 +61,7 @@
   margin-top: 14px;
   overflow-x: auto;
   padding-bottom: 5px;
+  scroll-snap-type: x mandatory;
 }
 
 .down-main::-webkit-scrollbar {
@@ -83,6 +84,7 @@
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
   transition: 0.25s ease;
   flex-shrink: 0;
+  scroll-snap-align: start;
 }
 
 .down:hover {
@@ -118,6 +120,23 @@
   font-size: 26px;
   font-weight: 700;
   color: #d8a85b;
+}
+
+/* STOCK BADGE */
+.stock {
+  display: inline-block;
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 700;
+  background: #e6f4ea;
+  color: #2e7d32;
+  width: fit-content;
+}
+
+.stock.out {
+  background: #fdecea;
+  color: #c62828;
 }
 
 /* Quantity Box */
@@ -191,6 +210,15 @@
   transform: translateY(-2px);
 }
 
+/* DISABLED STATE */
+.add-btn:disabled,
+.pay:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 /* =========================
        RESPONSIVE
 ========================= */
@@ -218,6 +246,11 @@
     padding: 18px;
   }
 
+  .shop-btn {
+    top: -20px;
+    left: 10px;
+  }
+
   .right h2 {
     font-size: 24px;
   }
@@ -236,7 +269,8 @@
     gap: 12px;
   }
 
-  .add-btn, .pay {
+  .add-btn,
+  .pay {
     width: 100%;
     font-size: 15px;
     padding: 12px;
@@ -265,6 +299,12 @@
 
 /* ANIMATION */
 @keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

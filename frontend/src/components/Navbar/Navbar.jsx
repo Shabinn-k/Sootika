@@ -24,12 +24,14 @@ const Navbar = ({ setShowLogin }) => {
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
+  // 🔹 Cart handler
   const handleCart = () => {
     if (!user) {
+      toast.dismiss();
       setShowLogin(true);
       toast.warn("Please login to view Cart!");
       return;
@@ -37,8 +39,10 @@ const Navbar = ({ setShowLogin }) => {
     navigate("/cart");
   };
 
+  // 🔹 Wishlist handler
   const handleWish = () => {
     if (!user) {
+      toast.dismiss();
       setShowLogin(true);
       toast.warn("Please login to view Wishlist!");
       return;
@@ -46,6 +50,7 @@ const Navbar = ({ setShowLogin }) => {
     navigate("/wishlist");
   };
 
+  // 🔹 Logout
   const handleLogout = () => {
     logoutUser();
     setOpenMenu(false);
@@ -61,7 +66,6 @@ const Navbar = ({ setShowLogin }) => {
           className="title"
           alt="logo"
           onClick={() => navigate("/")}
-          style={{ cursor: "pointer" }}
         />
 
         {/* DESKTOP LINKS */}
@@ -75,7 +79,7 @@ const Navbar = ({ setShowLogin }) => {
         <div className="fnction">
           {/* WISHLIST */}
           <div onClick={handleWish} className="navbar-search-icon">
-            <img src={image.hrt} alt="wishlist" width={25} />
+            <img src={image.hrt} alt="wishlist" className="icon" />
             {wishItems.length > 0 && (
               <div className="dot">{wishItems.length}</div>
             )}
@@ -83,7 +87,7 @@ const Navbar = ({ setShowLogin }) => {
 
           {/* CART */}
           <div onClick={handleCart} className="navbar-search-icon">
-            <img src={image.cart} alt="cart" width={25} />
+            <img src={image.cart} alt="cart" className="icon" />
             {cartItems.length > 0 && (
               <div className="dot">{cartItems.length}</div>
             )}
@@ -94,10 +98,16 @@ const Navbar = ({ setShowLogin }) => {
             <div className="profile-wrapper" ref={profileRef}>
               <div
                 className="profile-circle"
+                role="button"
+                tabIndex={0}
                 onClick={() => {
                   setOpenProfile((prev) => !prev);
                   setOpenMenu(false);
                 }}
+                onKeyDown={(e) =>
+                  e.key === "Enter" &&
+                  setOpenProfile((prev) => !prev)
+                }
               >
                 {user.name?.charAt(0)?.toUpperCase()}
               </div>
@@ -124,7 +134,7 @@ const Navbar = ({ setShowLogin }) => {
             </div>
           ) : (
             <button
-              className="rounded-2xl p-3 w-17 h-7 hover:bg-amber-200"
+              className="login-btn"
               onClick={() => setShowLogin(true)}
             >
               Sign In

@@ -41,11 +41,13 @@
   border-radius: 18px;
   box-shadow: 0 4px 16px rgba(210, 180, 140, 0.35);
   text-align: left;
-  transition: 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform;
 }
 
 .feedback-card:hover {
   transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(210, 180, 140, 0.45);
 }
 
 /* =========================
@@ -167,12 +169,17 @@
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: transform 0.3s ease, background 0.3s ease;
 }
 
 .write-review:hover {
   background: #b89558;
   transform: translateY(-2px);
+}
+
+.write-review:focus {
+  outline: 3px solid rgba(202, 167, 109, 0.6);
+  outline-offset: 4px;
 }
 
 /* =========================
@@ -186,5 +193,9 @@
   .average-rate {
     flex-direction: column;
     gap: 15px;
+  }
+
+  .stars {
+    justify-content: center;
   }
 }

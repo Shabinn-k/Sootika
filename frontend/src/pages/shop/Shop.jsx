@@ -15,6 +15,7 @@ const Shop = () => {
   const { user } = useAuth();
   const { addToCart, addToWish } = useContext(CartContext);
 
+  // 🔍 Search filter
   useEffect(() => {
     const filtered = products.filter((item) =>
       item.title.toLowerCase().includes(search.toLowerCase()) ||
@@ -23,9 +24,10 @@ const Shop = () => {
     setShop(filtered);
   }, [search]);
 
+  // 🛒 Add to cart
   const handleAddToCart = (product) => {
     if (!user) {
-      toast.error("Please login to add items to Cart!");
+      toast.warn("Please login to add items to Cart!");
       return;
     }
 
@@ -35,27 +37,27 @@ const Shop = () => {
     }
 
     addToCart(product);
-   
+    toast.success("Added to cart");
   };
 
+  // ❤️ Add to wishlist
   const handleAddToWish = (product) => {
     if (!user) {
-      toast.error("Please login to add items to Wishlist!");
+      toast.warn("Please login to add items to Wishlist!");
       return;
     }
-
     addToWish(product);
   };
 
   return (
     <div className="shop-page">
       <div className="back-home" onClick={() => navigate("/")}>
-        Back to home
+        ← Back to Home
       </div>
 
       <input
         type="search"
-        placeholder="search something"
+        placeholder="Search products..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
@@ -66,8 +68,8 @@ const Shop = () => {
             <div className="product-card" key={item.id}>
               <div className="image-box">
                 <FaHeart
-                  className="wishlist-icon"
-                  onClick={() => handleAddToWish(item)}
+                  className={`wishlist-icon ${!user ? "disabled" : ""}`}
+                  onClick={() => user && handleAddToWish(item)}
                 />
                 <img
                   src={item.image}
@@ -82,19 +84,18 @@ const Shop = () => {
 
               <h2 className="name">{item.name}</h2>
 
-              {/* BOOLEAN STOCK STATUS */}
               <p className={`stock ${item.stock === false ? "out" : ""}`}>
-                {item.stock === true ? "In Stock" : "Out of Stock"}
+                {item.stock ? "In Stock" : "Out of Stock"}
               </p>
 
               <span className="price">₹ {item.price}</span>
 
               <button
                 className="addCart"
-                disabled={item.stock === false}
+                disabled={!item.stock}
                 onClick={() => handleAddToCart(item)}
               >
-                {item.stock === true ? "Add to Cart" : "Out of Stock"}
+                {item.stock ? "Add to Cart" : "Out of Stock"}
               </button>
             </div>
           ))

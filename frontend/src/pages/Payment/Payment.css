@@ -5,6 +5,7 @@
   font-family: "Segoe UI", sans-serif;
 }
 
+/* CONTAINER */
 .payment-box {
   max-width: 1100px;
   margin: auto;
@@ -13,6 +14,7 @@
   gap: 24px;
 }
 
+/* COLUMNS */
 .left-column,
 .right-column {
   background: white;
@@ -21,12 +23,15 @@
   box-shadow: 0 6px 16px rgba(210, 180, 140, 0.25);
 }
 
-h2 {
+/* HEADINGS (SCOPED) */
+.payment-page h2 {
   margin-bottom: 14px;
   color: #4b3621;
 }
 
-/* ADDRESS */
+/* ======================
+   ADDRESS SECTION
+====================== */
 .address-card {
   padding: 14px;
   border-radius: 14px;
@@ -34,6 +39,11 @@ h2 {
   margin-bottom: 12px;
   cursor: pointer;
   background: #fffdf9;
+  transition: 0.25s ease;
+}
+
+.address-card:hover {
+  background: #fff7ee;
 }
 
 .address-card.selected {
@@ -41,6 +51,41 @@ h2 {
   border-color: #d2b48c;
 }
 
+/* DEFAULT BADGE */
+.default-badge {
+  margin-left: 8px;
+  padding: 3px 8px;
+  background: #d2b48c;
+  color: #4b3621;
+  font-size: 11px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* PHONE */
+.address-phone {
+  font-size: 14px;
+  color: #6b5a43;
+  margin-top: 6px;
+}
+
+/* SET DEFAULT BUTTON */
+.set-default-btn {
+  margin-top: 8px;
+  padding: 6px 12px;
+  font-size: 13px;
+  border-radius: 10px;
+  border: none;
+  background: #f0e0c8;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.set-default-btn:hover {
+  background: #e3caa3;
+}
+
+/* ADD ADDRESS */
 .add-address-btn {
   width: 100%;
   padding: 10px;
@@ -49,8 +94,14 @@ h2 {
   border: 1px dashed #d2b48c;
   background: transparent;
   cursor: pointer;
+  font-weight: 600;
 }
 
+.add-address-btn:hover {
+  background: #fff3e6;
+}
+
+/* ADDRESS FORM */
 .address-form input,
 .address-form textarea {
   width: 100%;
@@ -67,10 +118,17 @@ h2 {
   background: #d2b48c;
   border: none;
   color: #4b3621;
-  font-weight: 600;
+  font-weight: 700;
+  cursor: pointer;
 }
 
-/* SUMMARY */
+.address-form button:hover {
+  background: #c2a676;
+}
+
+/* ======================
+   ORDER SUMMARY
+====================== */
 .summary-item {
   display: flex;
   gap: 12px;
@@ -92,9 +150,12 @@ h2 {
 
 .summary-total h3 {
   margin-top: 6px;
+  color: #4b3621;
 }
 
-/* PAYMENT */
+/* ======================
+   PAYMENT OPTIONS
+====================== */
 .payment-options div {
   padding: 12px;
   border-radius: 14px;
@@ -102,6 +163,10 @@ h2 {
   cursor: pointer;
   margin-bottom: 10px;
   background: #fffdf9;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 600;
 }
 
 .payment-options .active {
@@ -109,6 +174,7 @@ h2 {
   border-color: #d2b48c;
 }
 
+/* PAYMENT DETAILS */
 .payment-details {
   margin-top: 12px;
   padding: 14px;
@@ -130,6 +196,7 @@ h2 {
   gap: 10px;
 }
 
+/* PAY BUTTON */
 .pay-btn {
   width: 100%;
   margin-top: 16px;
@@ -138,18 +205,27 @@ h2 {
   background: #d2b48c;
   border: none;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
   color: #4b3621;
   cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.pay-btn:hover {
+  background: #c2a676;
 }
 
 .pay-btn:disabled {
   opacity: 0.7;
+  cursor: not-allowed;
 }
 
-/* RESPONSIVE */
+/* ======================
+   RESPONSIVE
+====================== */
 @media (max-width: 900px) {
   .payment-box {
     grid-template-columns: 1fr;
   }
 }
+  

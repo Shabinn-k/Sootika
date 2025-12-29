@@ -1,6 +1,8 @@
 import "./BrandShowcase.css";
+import brandFallback from "../../assets/brandFallback.webp";
 
-// MORE BRANDS 🔥
+
+// BRAND DATA
 const womenBrands = [
   { id: 1, name: "Zara", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Zara_Logo.svg" },
   { id: 2, name: "H&M", logo: "https://upload.wikimedia.org/wikipedia/commons/5/53/H%26M-Logo.svg" },
@@ -21,13 +23,18 @@ const loopBrands = [...womenBrands, ...womenBrands];
 
 const BrandShowcase = () => {
   return (
-    <div className="brand-showcase-section">
-      <h2 className="brand-showcase-title">Top Women’s Fashion Brands</h2>
+    <section className="brand-showcase-section">
+      <h2 className="brand-showcase-title">
+        Top Women’s Fashion Brands
+      </h2>
 
       <div className="brand-loop-wrapper">
         <div className="brand-loop-track">
           {loopBrands.map((brand, index) => (
-            <div className="brand-card" key={index}>
+            <div
+              className="brand-card"
+              key={index}
+            >
               <div className="brand-logo-container">
                 <img
                   src={brand.logo}
@@ -35,17 +42,18 @@ const BrandShowcase = () => {
                   className="brand-logo"
                   loading="lazy"
                   onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = "/fallback-brand.png";
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src =brandFallback;
                   }}
                 />
               </div>
+
               <h3 className="brand-name">{brand.name}</h3>
             </div>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

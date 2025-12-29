@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../api/Axios";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -13,7 +13,7 @@ export const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  // 🔹 Load auth from localStorage
+  // 🔹 Load auth from localStorage (ONCE)
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedAdmin = localStorage.getItem("admin");
@@ -24,7 +24,7 @@ export const AuthProvider = ({ children }) => {
     setLoading(false);
   }, []);
 
-  // 🔹 Auto block check (polling)
+  // 🔹 Check user account status ONCE (no polling)
   useEffect(() => {
     if (!user) return;
 
@@ -41,8 +41,7 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-    const interval = setInterval(checkUserAcc, 5000);
-    return () => clearInterval(interval);
+    checkUserAcc();
   }, [user]);
 
   // 🔹 LOGIN
@@ -72,7 +71,9 @@ export const AuthProvider = ({ children }) => {
       }
 
       // ---- USER LOGIN ----
-      const res = await api.get("/users", { params: { email } });
+      const res = await api.get("/users", {
+        params: { email },
+      });
 
       if (!res.data.length) {
         toast.error("Email not found!");
@@ -147,8 +148,8 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  // ⏳ Prevent render before auth load
-  if (loading) return null;
+  // ⏳ Loading UI
+  if (loading) return <div>Loading...</div>;
 
   return (
     <AuthContext.Provider
